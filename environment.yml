@@ -1,0 +1,14 @@
+name: ieeg-hmm
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - numpy
+  - mne
+  - matplotlib
+  - pandas
+  - jupyterlab
+  - ipykernel
+  - pip:
+      - osl-dynamics[tf]>=3.7.2
