@@ -1,0 +1,83 @@
+{
+  "model": "single-channel time-delay-embedded hidden Markov model (TDE-HMM)",
+  "n_states": 4,
+  "sampling_frequency_hz": 100,
+  "n_embeddings": 11,
+  "n_pca_components": 6,
+  "sequence_length": 200,
+  "learn_means": false,
+  "state_order": "States are ordered by descending 1-4 Hz power on held-out subjects: model state k (0-indexed) is State k+1",
+  "preprocessing": {
+    "reference": "bipolar (adjacent contacts on the same shaft/strip)",
+    "notch_hz": "line frequency and harmonics",
+    "band_pass_hz": [
+      0.1,
+      45.0
+    ],
+    "filter": "FIR (firwin, Hamming, zero-phase)",
+    "resample_hz": 100,
+    "standardisation": "each channel z-scored over the recording",
+    "bad_segment_removal": null
+  },
+  "training_data": {
+    "dataset": "HUP iEEG epilepsy cohort, OpenNeuro ds004100",
+    "modality": "stereo-EEG (SEEG) + electrocorticography (ECoG)",
+    "task": "interictal",
+    "channels_per_subject": 25,
+    "train": {
+      "n_subjects": 45,
+      "channel_hours": 187.5,
+      "total_samples": 67500000
+    },
+    "validation": {
+      "n_subjects": 11,
+      "channel_hours": 43.75,
+      "total_samples": 15750000,
+      "subjects": [
+        "sub-HUP116",
+        "sub-HUP117",
+        "sub-HUP146",
+        "sub-HUP162",
+        "sub-HUP165",
+        "sub-HUP180",
+        "sub-HUP187",
+        "sub-HUP064",
+        "sub-HUP086",
+        "sub-HUP087",
+        "sub-HUP094"
+      ]
+    }
+  },
+  "training": {
+    "epochs": 20,
+    "batch_size": 256,
+    "learning_rate": 0.01,
+    "train_free_energy": 7.370058172759713,
+    "validation_free_energy": 7.1521881316485265
+  },
+  "selection": {
+    "criterion": "lowest validation free energy (held-out subjects)",
+    "selected_seed": 1,
+    "runs": [
+      {
+        "seed": 0,
+        "train_free_energy": 7.369893738300177,
+        "val_free_energy": 7.153555269460763,
+        "same_state_as_selected": 0.993815898093702
+      },
+      {
+        "seed": 1,
+        "train_free_energy": 7.370058172759713,
+        "val_free_energy": 7.1521881316485265,
+        "same_state_as_selected": 1.0
+      },
+      {
+        "seed": 2,
+        "train_free_energy": 7.369894971136808,
+        "val_free_energy": 7.153589665194131,
+        "same_state_as_selected": 0.9921129935610054
+      }
+    ]
+  },
+  "osl_dynamics_version": "3.7.2.dev5+g7fd46de1f"
+}
